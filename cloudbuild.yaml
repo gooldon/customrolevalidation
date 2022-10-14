@@ -35,6 +35,15 @@ steps:
   dir: deploy/orgrole
 # [END tf-parse]
 
+# [debug]
+- id: 'debug'
+  name: gcr.io/config-validator/terraform-validator
+  entrypoint: "/bin/bash"
+  args:
+  - cat
+  - ./terraform.json
+  dir: deploy/orgrole
+
 # [START tf-vet]
 - id: 'tf validate'
   name: 'gcr.io/config-validator/terraform-validator'
