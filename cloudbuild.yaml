@@ -54,7 +54,7 @@ steps:
 
 # [START tf-vet]
 - id: 'tf validate'
-  name: 'hashicorp/terraform:1.0.0'
+  name: 'google/cloud-sdk'
   dir: deploy/orgrole
   entrypoint: 'sh'
   args:
