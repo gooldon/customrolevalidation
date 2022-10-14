@@ -54,11 +54,11 @@ steps:
 
 # [START tf-vet]
 - id: 'tf validate'
-  name: 'google/cloud-sdk'
+  name: 'gcr.io/config-validator/terraform-validator'
   dir: deploy/orgrole
-  entrypoint: 'sh'
-  args:
-  - 'apt-get install google-cloud-sdk-terraform-tools'
-  - '-c'
-  - 'gcloud beta terraform vet terraform.json --policy-library=./w-secteam-repo'
+  entrypoint: 'terraform'
+  - validate
+  - terraform.json
+  - --policy-path=./w-secteam-repo
+
 # [END tf-vet]  
