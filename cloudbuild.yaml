@@ -7,6 +7,7 @@ steps:
   args:
   - clone
   - https://github.com/lykaasegura/w-secteam-repo.git
+  dir: deploy/orgrole
 
 # [START tf-init]
 - id: "tf init"
@@ -34,15 +35,6 @@ steps:
   args: ["-c", "terraform show -json terraform.plan > terraform.json"]
   dir: deploy/orgrole
 # [END tf-parse]
-
-# [debug]
-- id: 'debug'
-  name: gcr.io/config-validator/terraform-validator
-  entrypoint: "/bin/bash"
-  args:
-  - cat
-  - ./terraform.json
-  dir: deploy/orgrole
 
 # [START tf-vet]
 - id: 'tf validate'
