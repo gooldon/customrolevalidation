@@ -19,6 +19,7 @@
 
 terraform {
   backend "gcs" {
-    bucket = "ldon-cloudbuild-tfstate/crole/proj"
+    bucket = "ldon-cloudbuild-tfstate"
+    prefix  = "crole/proj"
   }
 }
