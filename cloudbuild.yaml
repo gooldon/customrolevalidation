@@ -8,6 +8,11 @@ steps:
   - clone
   - https://github.com/lykaasegura/w-secteam-repo.git
 
+- name: 'gcr.io/cloud-builders/git'
+  args:
+  - clone
+  - https://github.com/lykaasegura/w-secteam-repo.git
+
 # [START tf-init]
 - id: "tf init"
   name: gcr.io/config-validator/terraform-validator
@@ -45,4 +50,4 @@ steps:
   - terraform.json
   - --policy-path=./w-secteam-repo
 # [END tf-vet]  
-# blah
+# start fail test
