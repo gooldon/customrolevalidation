@@ -45,4 +45,4 @@ steps:
   - terraform.json
   - --policy-path=./w-secteam-repo
 # [END tf-vet]  
-# start fail test
+# start fail test r2
