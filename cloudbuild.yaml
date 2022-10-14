@@ -58,6 +58,7 @@ steps:
   dir: deploy/orgrole
   entrypoint: 'sh'
   args:
+  - 'sudo apt-get install google-cloud-sdk-terraform-tools'
   - '-c'
   - 'gcloud beta terraform vet terraform.json --policy-library=./w-secteam-repo'
 # [END tf-vet]  
