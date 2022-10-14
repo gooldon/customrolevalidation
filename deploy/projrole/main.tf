@@ -1,5 +1,8 @@
 #custom role IAM assignment test
 
+provider "google" {
+}
+
 #Project IAM Policy Success Scenario
 
 resource "google_project_iam_binding" "projtfdeploy" {

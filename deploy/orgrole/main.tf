@@ -1,6 +1,7 @@
 #custom role IAM assignment test
 
-
+provider "google" {
+}
 
 #Org Policy Success Scenario
 
