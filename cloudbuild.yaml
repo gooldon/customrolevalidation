@@ -1,1 +1,62 @@
-#first commit
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+steps:
+- name: 'gcr.io/cloud-builders/git'
+  args:
+  - clone
+  - https://github.com/lykaasegura/w-secteam-repo.git
+
+#- id: 'branch name'
+#  name: 'alpine'
+#  entrypoint: 'sh'  
+#  args: 
+#  - '-c'
+#  - | 
+#      echo "***********************"
+#      echo "$BRANCH_NAME"
+#      echo "***********************"
+
+- id: "tf init"
+  name: 'gcr.io/cloud-builders/git'
+  entrypoint: terraform
+  args:
+  - init
+
+#- id: 'tf init'
+#  name: 'hashicorp/terraform:1.0.0'
+#  entrypoint: 'sh'
+#  args: 
+#  - '-c'
+#  - 'terraform init || exit 1'
+#  dir: deployments/app1
+
+# [START tf-plan]
+- id: 'tf plan'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - 'terraform plan -out=terraform.plan'
+  dir: deploy/orgrole
+# [END tf-plan]
+
+# [START tf-parse for terraform validator]
+- id: 'tf parse'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - 'terraform show -json terraform.plan > terraform.json'
+  dir: deploy/orgrole
+# [END tf-plan]
+
+# [START tf-vet]
+- id: 'tf validate'
+  name: 'hashicorp/terraform:1.0.0'
+  dir: deploy/orgrole
+  entrypoint: 'sh'
+  args:
+  - '-c'
+  - 'gcloud beta terraform vet terraform.json --policy-library=./w-secteam-repo'
+# [END tf-vet]  
