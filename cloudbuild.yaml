@@ -22,6 +22,7 @@ steps:
   entrypoint: terraform
   args:
   - init
+  dir: deploy/orgrole
 
 #- id: 'tf init'
 #  name: 'hashicorp/terraform:1.0.0'
