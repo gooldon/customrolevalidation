@@ -5,7 +5,7 @@ provider "google" {
 
 #Org Policy Success Scenario
 
-resource "google_organization_iam_binding" "orgtfdeploy" {
+resource "google_organization_iam_binding" "orgtfdeploy_success" {
   org_id  = "716543262869"
   role    = "organizations/716543262869/roles/custom_role_org_s"
   members = [
@@ -15,10 +15,10 @@ resource "google_organization_iam_binding" "orgtfdeploy" {
 
 #Org Policy Failure Scenario
 
-resource "google_organization_iam_binding" "orgtfdeploy" {
-  org_id  = "716543262869"
-  role    = "organizations/716543262869/roles/custom_role_org_f"
-  members = [
-      "serviceAccount:customrolesa@tfdeploy-221013.iam.gserviceaccount.com",
-    ]
-}
+#resource "google_organization_iam_binding" "orgtfdeploy_failure" {
+#  org_id  = "716543262869"
+#  role    = "organizations/716543262869/roles/custom_role_org_f"
+#  members = [
+#      "serviceAccount:customrolesa@tfdeploy-221013.iam.gserviceaccount.com",
+#    ]
+#}

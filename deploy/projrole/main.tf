@@ -5,7 +5,7 @@ provider "google" {
 
 #Project IAM Policy Success Scenario
 
-resource "google_project_iam_binding" "projtfdeploy" {
+resource "google_project_iam_binding" "projtfdeploy_success" {
   project = "tfdeploy-221013"
   role    = "projects/tfdeploy-221013/roles/custom_role_proj_s"
   members = [
@@ -15,10 +15,10 @@ resource "google_project_iam_binding" "projtfdeploy" {
 
 #Project IAM Policy Failure Scenario
 
-resource "google_project_iam_binding" "projtfdeploy" {
-  project = "tfdeploy-221013"
-  role    = "projects/tfdeploy-221013/roles/custom_role_proj_f"
-  members = [
-      "serviceAccount:customrolesa@tfdeploy-221013.iam.gserviceaccount.com",
-    ]
-}
+#resource "google_project_iam_binding" "projtfdeploy_failure" {
+#  project = "tfdeploy-221013"
+#  role    = "projects/tfdeploy-221013/roles/custom_role_proj_f"
+#  members = [
+#      "serviceAccount:customrolesa@tfdeploy-221013.iam.gserviceaccount.com",
+#    ]
+#}
