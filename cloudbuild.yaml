@@ -2,55 +2,38 @@ options:
   logging: CLOUD_LOGGING_ONLY
 
 steps:
+# [clone policy library]
 - name: 'gcr.io/cloud-builders/git'
   args:
   - clone
   - https://github.com/lykaasegura/w-secteam-repo.git
 
-#- id: 'branch name'
-#  name: 'alpine'
-#  entrypoint: 'sh'  
-#  args: 
-#  - '-c'
-#  - | 
-#      echo "***********************"
-#      echo "$BRANCH_NAME"
-#      echo "***********************"
-
+# [START tf-init]
 - id: "tf init"
-  name: 'hashicorp/terraform:1.0.0'
+  name: gcr.io/config-validator/terraform-validator
   entrypoint: terraform
   args:
   - init
   dir: deploy/orgrole
-
-#- id: 'tf init'
-#  name: 'hashicorp/terraform:1.0.0'
-#  entrypoint: 'sh'
-#  args: 
-#  - '-c'
-#  - 'terraform init || exit 1'
-#  dir: deploy/orgrole
+# [END tf-init]
 
 # [START tf-plan]
 - id: 'tf plan'
-  name: 'hashicorp/terraform:1.0.0'
-  entrypoint: 'sh'
-  args: 
-  - '-c'
-  - 'terraform plan -out=terraform.plan'
+  name: gcr.io/config-validator/terraform-validator
+  entrypoint: terraform
+  args:
+  - plan
+  - -out=terraform.plan
   dir: deploy/orgrole
 # [END tf-plan]
 
 # [START tf-parse for terraform validator]
 - id: 'tf parse'
-  name: 'hashicorp/terraform:1.0.0'
-  entrypoint: 'sh'
-  args: 
-  - '-c'
-  - 'terraform show -json terraform.plan > terraform.json'
+  name: gcr.io/config-validator/terraform-validator
+  entrypoint: "/bin/bash"
+  args: ["-c", "terraform show -json terraform.plan > terraform.json"]
   dir: deploy/orgrole
-# [END tf-plan]
+# [END tf-parse]
 
 # [START tf-vet]
 - id: 'tf validate'
@@ -61,5 +44,4 @@ steps:
   - validate
   - terraform.json
   - --policy-path=./w-secteam-repo
-
 # [END tf-vet]  
