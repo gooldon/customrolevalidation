@@ -56,7 +56,6 @@ steps:
 - id: 'tf validate'
   name: 'gcr.io/config-validator/terraform-validator'
   dir: deploy/orgrole
-  entrypoint: 'terraform'
   - validate
   - terraform.json
   - --policy-path=./w-secteam-repo
